@@ -1,8 +1,9 @@
 <template>
 	<ul class="todo-list">
-		<li v-for="todo in todoList" :key="todo.id" class="todo">
+		<li v-for="todo in sortedTask" :key="todo.id" class="todo">
 			<div class="view">
-				<label >{{ todo.title }}</label>
+				<input class="toggle" type="checkbox" @click="completeTask(todo)">
+				<label :class="{'todo-completed': todo.completed}">{{ todo.title }}</label>
 			</div>
 		</li>
 	</ul>
@@ -24,6 +25,11 @@ export default {
 			set: function (novaLista){
 				this.todoList.concat(novaLista)
 			}
+		}
+	},
+	methods:{
+		completeTask (task){
+			task.completed = !task.completed
 		}
 	}
 }
